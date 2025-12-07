@@ -1,8 +1,3 @@
-app_name = " Budget Tracker"
-version = " 1.0"
-print("Welcome to" +app_name+version)
-
-
 class Transaction:
 
     def __init__(self, date, amount, category, description, ttype):
@@ -233,7 +228,7 @@ def main():
     tracker = BudgetTracker()
 
     # Welcome message
-    print("\n=== Welcome to Budget Tracker ===")
+    print("\n=== Welcome to Budget Tracker Version 1.0 ===")
 
     # Main loop - keep running until user exits
     while True:
