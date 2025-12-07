@@ -153,3 +153,75 @@ class BudgetTracker:
         last_trans = self.transactions[-1]
         self.transactions.pop()
         print("Undid last transaction: " + last_trans.type + " of $" + str(last_trans.amount))
+
+
+# Helper function to get valid amount from user
+def get_valid_amount():
+    # Keep asking until we get a valid positive number
+    while True:
+        try:
+            amount = float(input("Amount: $"))
+            if amount <= 0:
+                print("Amount must be positive! Try again.")
+                continue
+            return amount
+        except ValueError:
+            print("Invalid input! Please enter a number.")
+
+
+# Helper function to show the menu
+def display_menu():
+    # Show all available options
+    print("\n--- Budget Tracker Menu ---")
+    print("1) Add income")
+    print("2) Add expense")
+    print("3) List all transactions")
+    print("4) Filter transactions")
+    print("5) Show budget summary")
+    print("6) Undo last transaction")
+    print("0) Exit")
+
+
+# Function to handle adding income
+def handle_add_income(tracker):
+    # Get all the information needed for an income transaction
+    print("\n--- Add Income ---")
+    date = input("Date (YYYY-MM-DD): ")
+    amount = get_valid_amount()
+    category = input("Category: ")
+    description = input("Description: ")
+    tracker.add_income(date, amount, category, description)
+
+
+# Function to handle adding expense
+def handle_add_expense(tracker):
+    # Get all the information needed for an expense transaction
+    print("\n--- Add Expense ---")
+    date = input("Date (YYYY-MM-DD): ")
+    amount = get_valid_amount()
+    category = input("Category: ")
+    description = input("Description: ")
+    tracker.add_expense(date, amount, category, description)
+
+
+# Function to handle filtering
+def handle_filter(tracker):
+    # Let user choose how to filter transactions
+    print("\n--- Filter Transactions ---")
+    print("1) By type (income/expense)")
+    print("2) By category")
+    print("3) By month (YYYY-MM)")
+
+    filter_choice = input("Choose filter: ")
+
+    if filter_choice == "1":
+        trans_type = input("Type (income/expense): ").lower()
+        tracker.filter_transactions("type", trans_type)
+    elif filter_choice == "2":
+        category = input("Category: ")
+        tracker.filter_transactions("category", category)
+    elif filter_choice == "3":
+        month = input("Month (YYYY-MM): ")
+        tracker.filter_transactions("month", month)
+    else:
+        print("Invalid option!")
