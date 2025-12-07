@@ -225,3 +225,41 @@ def handle_filter(tracker):
         tracker.filter_transactions("month", month)
     else:
         print("Invalid option!")
+
+
+# Main function - runs the program
+def main():
+    # Create the budget tracker
+    tracker = BudgetTracker()
+
+    # Welcome message
+    print("\n=== Welcome to Budget Tracker ===")
+
+    # Main loop - keep running until user exits
+    while True:
+        display_menu()
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            handle_add_income(tracker)
+        elif choice == "2":
+            handle_add_expense(tracker)
+        elif choice == "3":
+            tracker.list_transactions()
+        elif choice == "4":
+            handle_filter(tracker)
+        elif choice == "5":
+            tracker.show_summary()
+        elif choice == "6":
+            tracker.undo_last()
+        elif choice == "0":
+            print("\nThank you for using Budget Tracker!")
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice! Please try again.")
+
+
+# Run the program
+if __name__ == "__main__":
+    main()
